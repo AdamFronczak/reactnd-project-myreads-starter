@@ -7,6 +7,18 @@ export class Book extends React.Component {
         super(props);
     }
 
+    changeShelf = shelf => {
+        var book = { ...this.props.book }
+        
+        if (shelf === "none") {
+            this.props.onRemoveBook(book);
+        }
+        else {
+            book.shelf = shelf;
+            this.props.onUpdateBook(book);
+        }
+    }
+
     render() {
         return (
             <div className="book">
@@ -14,12 +26,12 @@ export class Book extends React.Component {
                     <div className="book-cover" style={{
                         width: 128,
                         height: 193,
-                        backgroundImage: 'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")'
+                        backgroundImage: `url("${this.props.book.imageLinks && this.props.book.imageLinks.thumbnail}")`
                     }}></div>
-                    <BookShelfChanger />
+                    <BookShelfChanger currentShelf={this.props.book.shelf} onSelect={this.changeShelf} />
                 </div>
-                <div className="book-title">To Kill a Mockingbird</div>
-                <div className="book-authors">Harper Lee</div>
+                <div className="book-title">{this.props.book.title}</div>
+                <div className="book-authors">{this.props.book.authors && this.props.book.authors.join(", ")}</div>
             </div>
         );
     }

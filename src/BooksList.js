@@ -9,10 +9,6 @@ export class BooksList extends React.Component {
         super(props);
     }
 
-    state = {
-        books: []
-    }
-
     render() {
         return (
             <div className="list-books">
@@ -21,12 +17,17 @@ export class BooksList extends React.Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <Bookshelf title="Currently Reading" books={this.state.books} />
-                        <Bookshelf title="Want to Read" books={this.state.books} />
-                        <Bookshelf title="Read" books={this.state.books} />
+                        <Bookshelf title="Currently Reading" books={this.props.books.filter(b => b.shelf === "currentlyReading")}
+                                   onUpdateBook={this.props.onUpdateBook} onRemoveBook={this.props.onRemoveBook} />
+
+                        <Bookshelf title="Want to Read" books={this.props.books.filter(b => b.shelf === "wantToRead")}
+                                   onUpdateBook={this.props.onUpdateBook} onRemoveBook={this.props.onRemoveBook} />
+
+                        <Bookshelf title="Read" books={this.props.books.filter(b => b.shelf === "read")}
+                                   onUpdateBook={this.props.onUpdateBook} onRemoveBook={this.props.onRemoveBook} />
                     </div>
                 </div>
-                <OpenSearch setState={this.props.setState} />
+                <OpenSearch />
             </div>
         );
     }

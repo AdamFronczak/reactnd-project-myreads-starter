@@ -15,8 +15,9 @@ export class Bookshelf extends React.Component {
                     <ol className="books-grid">
                         {
                             this.props.books.map(b => (
-                                <li>
-                                    <Book book={b} />
+                                <li key={b.id}>
+                                    <Book book={b}
+                                          onUpdateBook={this.props.onUpdateBook} onRemoveBook={this.props.onRemoveBook} />
                                 </li>
                             ))
                         }

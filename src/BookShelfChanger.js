@@ -1,4 +1,6 @@
 import React from 'react';
+import { BookShelfChangerOption } from './BookShelfChangerOption';
+
 
 export class BookShelfChanger extends React.Component {
     constructor(props) {
@@ -8,12 +10,12 @@ export class BookShelfChanger extends React.Component {
     render() {
         return (
             <div className="book-shelf-changer">
-                <select>
+                <select onChange={e => this.props.onSelect(e.target.value)} value="move">
                     <option value="move" disabled>Move to...</option>
-                    <option value="currentlyReading">Currently Reading</option>
-                    <option value="wantToRead">Want to Read</option>
-                    <option value="read">Read</option>
-                    <option value="none">None</option>
+                    <BookShelfChangerOption value="currentlyReading" title="Currently Reading" currentShelf={this.props.currentShelf} />
+                    <BookShelfChangerOption value="wantToRead" title="Want to Read" currentShelf={this.props.currentShelf} />
+                    <BookShelfChangerOption value="read" title="Read" currentShelf={this.props.currentShelf} />
+                    <BookShelfChangerOption value="none" title="None" currentShelf={this.props.currentShelf} />
                 </select>
             </div>
         );
