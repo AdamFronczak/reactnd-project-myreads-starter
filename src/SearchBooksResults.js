@@ -2,10 +2,6 @@ import React from 'react';
 import { Book } from './Book';
 
 export class SearchBooksResults extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="search-books-results">
@@ -14,7 +10,7 @@ export class SearchBooksResults extends React.Component {
                         this.props.books.map(b => (
                             <li key={b.id}>
                                 <Book book={b}
-                                      onUpdateBook={this.props.onUpdateBook} onRemoveBook={this.props.onRemoveBook} />
+                                      onAddOrUpdateBook={this.props.onAddOrUpdateBook} onRemoveBook={this.props.onRemoveBook} />
                             </li>
                         ))
                     }

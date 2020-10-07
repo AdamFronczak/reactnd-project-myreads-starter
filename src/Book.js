@@ -3,19 +3,15 @@ import { BookShelfChanger } from './BookShelfChanger';
 
 
 export class Book extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     changeShelf = shelf => {
         var book = { ...this.props.book }
+        book.shelf = shelf;
         
         if (shelf === "none") {
             this.props.onRemoveBook(book);
         }
         else {
-            book.shelf = shelf;
-            this.props.onUpdateBook(book);
+            this.props.onAddOrUpdateBook(book);
         }
     }
 
@@ -28,7 +24,7 @@ export class Book extends React.Component {
                         height: 193,
                         backgroundImage: `url("${this.props.book.imageLinks && this.props.book.imageLinks.thumbnail}")`
                     }}></div>
-                    <BookShelfChanger currentShelf={this.props.book.shelf} onSelect={this.changeShelf} />
+                    <BookShelfChanger currentShelf={this.props.book.shelf || "none"} onSelect={this.changeShelf} />
                 </div>
                 <div className="book-title">{this.props.book.title}</div>
                 <div className="book-authors">{this.props.book.authors && this.props.book.authors.join(", ")}</div>
